@@ -1,0 +1,35 @@
+main {
+    max-width: 1000px;
+    margin: auto;
+}
+
+form {
+    display:flex;
+    border: 1px solid black;
+}
+
+form > div {
+    padding:1vw;
+}
+
+#character-info {
+    flex-basis: 300px;
+    flex-shrink: 1;
+    flex-grow:0;
+    border-right: 1px solid black;
+   
+}
+
+#player-info {
+    flex-basis: 700px;
+    flex-shrink: 0;
+    flex-grow: 3;
+}
+
+#scene {
+    border-bottom: 1px solid black;
+}
+
+.hide {
+    visibility: hidden;
+}
