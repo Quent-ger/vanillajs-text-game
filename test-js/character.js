@@ -27,4 +27,5 @@ export class Character{
     getStatus(){
         return this.relation;
     }
+
 }

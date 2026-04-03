@@ -20,6 +20,7 @@ export class Ui {
         this.scene = document.querySelector("#scene");
         this.choicesDiv = document.querySelector("#choices");
 
+
         // Form
         this.form = document.querySelector("#game-form");
         this.form.addEventListener("submit", (e) => {
@@ -28,9 +29,6 @@ export class Ui {
 
         this.setPlayerName();
 
-        this.setCharacterinfo();
-
-        this.testStartScene();
     }
 
    setPlayerName(){
@@ -46,27 +44,32 @@ export class Ui {
 
     }
 
-    setCharacterinfo(){
-        const character = new Character("Test","Giorgio");
+    setCharacterinfo(character){
         this.characterName.innerText = `${character.lastName} ${character.firstName}`;
         this.currentScore.innerText = `${character.score}`;
         this.currentStatus.innerText = character.setStatus();
         this.currentStatus.innerText = character.getStatus();
-
+        // this.characterDesc.innerText = character.
     }
 
-    testStartScene(){
-        this.scene.innerText = "";
-        this.scene.innerText = story.start.text;
-
-        const currentChoicesArray = Array.from(Object.values(story.start.choices));
-        console.log(currentChoicesArray);
-        currentChoicesArray.forEach((element) =>{
-            let 
-        } )
-
-
+    renderScene(scene) {
+        this.scene.innerText = scene
     }
+
+    // testStartScene(){
+    //     this.scene.innerText = "";
+    //     this.scene.innerText = story.start.text;
+    //
+    //     const currentChoicesArray = Array.from(Object.values(story.start.choices));
+    //     console.log(currentChoicesArray);
+    //     currentChoicesArray.forEach((element) =>{
+    //         let
+    //     } )
+    //
+    //
+    // }
+
+
 
     
 
