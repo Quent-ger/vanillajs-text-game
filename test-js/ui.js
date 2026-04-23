@@ -19,6 +19,14 @@ export class Ui {
         // Scene and choices
         this.scene = document.querySelector("#scene");
         this.choicesDiv = document.querySelector("#choices");
+        this.choicesDiv.addEventListener("click", e => {
+            if (e.target.classList.contains("choice-btn")){
+             
+                const nextScene = story[e.target.dataset.nextId]
+
+                this.renderScene(nextScene)
+            }
+        })
 
 
         // Form
@@ -53,7 +61,25 @@ export class Ui {
     }
 
     renderScene(scene) {
-        this.scene.innerText = scene
+        console.log(scene);
+        this.scene.innerText = scene.text
+
+        this.choicesDiv.textContent ="";
+
+         if(scene.choices.length > 0){
+
+            scene.choices.forEach(element => {
+
+            const choiceButton = document.createElement("button");
+           choiceButton.classList.add("choice-btn");
+           choiceButton.textContent = element.text;
+           choiceButton.dataset.nextId = element.next;
+           this.choicesDiv.appendChild(choiceButton);
+
+            });
+          
+        }
+       
     }
 
     // testStartScene(){
