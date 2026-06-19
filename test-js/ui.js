@@ -25,6 +25,7 @@ export class Ui {
                 const nextScene = story[e.target.dataset.nextId]
 
                 this.renderScene(nextScene)
+
             }
         })
 
@@ -34,6 +35,11 @@ export class Ui {
         this.form.addEventListener("submit", (e) => {
             e.preventDefault();
         });
+
+        // Typewriter effect
+        this.skipTextAnimation = document.querySelector('.skip-effect');
+        this.timeoutIds  = [];
+
 
         this.setPlayerName();
 
@@ -61,41 +67,72 @@ export class Ui {
     }
 
     renderScene(scene) {
-        console.log(scene);
-        this.scene.innerText = scene.text
+        
+        this.scene.textContent = "";
 
         this.choicesDiv.textContent ="";
 
-         if(scene.choices.length > 0){
+        const newButtons = [];
+
+        if(scene.choices.length > 0){
 
             scene.choices.forEach(element => {
-
-            const choiceButton = document.createElement("button");
-           choiceButton.classList.add("choice-btn");
-           choiceButton.textContent = element.text;
-           choiceButton.dataset.nextId = element.next;
-           this.choicesDiv.appendChild(choiceButton);
-
+                const choiceButton = document.createElement("button");
+                choiceButton.classList.add("choice-btn");
+                choiceButton.textContent = element.text;
+                choiceButton.dataset.nextId = element.next;
+                choiceButton.disabled = true;
+                this.choicesDiv.appendChild(choiceButton);
+                newButtons.push(choiceButton);
             });
-          
-        }
-       
+
+        } 
+
+        this.textEffect(scene.text);
+        // this.scene.innerText = scene.text;
+
+        newButtons.forEach(button => button.disabled = false);
+        
+
     }
 
-    // testStartScene(){
-    //     this.scene.innerText = "";
-    //     this.scene.innerText = story.start.text;
-    //
-    //     const currentChoicesArray = Array.from(Object.values(story.start.choices));
-    //     console.log(currentChoicesArray);
-    //     currentChoicesArray.forEach((element) =>{
-    //         let
-    //     } )
-    //
-    //
-    // }
+    textEffect(sceneText){
 
+        this.cancelTypewriter();
+      
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        if (prefersReducedMotion) {
+            this.scene.textContent = sceneText;
+        } else {
+            const chars = [...sceneText];
+     
+            chars.forEach((char, index) => 
+                {
+                const timeoutId = setTimeout( () => this.displayChar(char),index * 50);
+                this.timeoutIds.push(timeoutId);
+                }
+            )
+        }
+
+        this.skipTextAnimation.addEventListener("click", () => {
+            this.cancelTypewriter();
+            this.scene.textContent = "";
+            setTimeout(() => this.scene.textContent = sceneText, 30);
+        }
+    )
+
+    
+    }
+
+    cancelTypewriter(){
+        this.timeoutIds.forEach(id => clearTimeout(id));
+
+    }
+
+    displayChar(char){
+        this.scene.textContent += char;
+    }
 
     
 

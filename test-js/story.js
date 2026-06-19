@@ -10,7 +10,7 @@ export const story = {
     startB: {
         text:"Great! You've managed to reach a choice node.",
         choices: [
-            {key: "a", text:"a fake choice to see", next:""}
+            {key: "a", text:"a fake choice to see", next:"start"}
         ]
     }
 }

@@ -12,6 +12,15 @@ form > div {
     padding:1vw;
 }
 
+button {
+    background: none;
+    border:3px solid black;
+    font-weight: 700;
+    margin:8px;
+    padding:16px;
+    cursor:pointer; 
+}
+
 #character-info {
     flex-basis: 300px;
     flex-shrink: 1;
@@ -26,8 +35,13 @@ form > div {
     flex-grow: 3;
 }
 
-#scene {
-    border-bottom: 1px solid black;
+#choices {
+    border-top: 1px solid black;
+}
+
+.skip-effect {
+    display: block;
+    margin-left:auto;
 }
 
 .hide {
